@@ -71,6 +71,10 @@ public:
 	 */
 	Type update(const Type new_value, const float deltatime)
 	{
+		// use both namespaces to find math::constrain(float) and matrix::constrain(Vector)
+		using namespace math;
+		using namespace matrix;
+
 		// Limit the rate of change of the value
 		const Type dvalue_desired = new_value - _value;
 		const Type dvalue_max = _slew_rate * deltatime;
@@ -82,20 +86,4 @@ public:
 private:
 	Type _slew_rate{}; ///< maximum rate of change for the value
 	Type _value{}; ///< state to keep last value of the slew rate
-
-	float constrain(float value, float min, float max)
-	{
-		return math::constrain(value, min, max);
-	}
-
-	matrix::Vector3f constrain(const matrix::Vector3f &value, const matrix::Vector3f &min, const matrix::Vector3f &max)
-	{
-		matrix::Vector3f constrained;
-
-		for (int i = 0; i < 3; i++) {
-			constrained(i) = math::constrain(value(i), min(i), max(i));
-		}
-
-		return constrained;
-	}
 };
