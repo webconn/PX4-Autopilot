@@ -162,6 +162,8 @@
 #define DRV_MAG_DEVTYPE_UAVCAN	0x88
 #define DRV_DIST_DEVTYPE_UAVCAN	0x89
 
+// PioneerFlow devtype
+#define DRV_FLOW_DEVTYPE_PIONEERFLOW 0x90
 
 #define DRV_DEVTYPE_UNUSED		0xff
 

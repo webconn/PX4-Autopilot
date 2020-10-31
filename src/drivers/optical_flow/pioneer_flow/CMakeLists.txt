@@ -31,7 +31,11 @@
 #
 ############################################################################
 
-add_subdirectory(paw3902)
-add_subdirectory(pmw3901)
-add_subdirectory(px4flow)
-add_subdirectory(pioneer_flow)
+px4_add_module(
+	MODULE drivers__optical_flow__pioneer_flow
+	MAIN pioneer_flow
+	SRCS
+		pioneer_flow_main.cpp
+		pioneer_flow.cpp
+		pioneer_flow.hpp
+	)

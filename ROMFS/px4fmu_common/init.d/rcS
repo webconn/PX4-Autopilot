@@ -515,6 +515,12 @@ else
 		px4flow start -X
 	fi
 
+	# Check for Pioneer flow sensor
+	if param compare SENS_EN_PNRFLOW 1
+	then
+		pioneer_flow start -X
+	fi
+
 	# Blacksheep telemetry
 	if param greater TEL_BST_EN 0
 	then
