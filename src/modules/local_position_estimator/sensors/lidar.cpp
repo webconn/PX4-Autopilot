@@ -27,6 +27,12 @@ void BlockLocalPositionEstimator::lidarInit()
 				 int(100 * _lidarStats.getStdDev()(0)));
 		_sensorTimeout &= ~SENSOR_LIDAR;
 		_sensorFault &= ~SENSOR_LIDAR;
+
+                if (!_altOriginInitialized) {
+			_altOriginInitialized = true;
+			_altOriginGlobal = false;
+			_altOrigin = _baroAltOrigin;
+		}
 	}
 }
 
@@ -34,7 +40,8 @@ int BlockLocalPositionEstimator::lidarMeasure(Vector<float, n_y_lidar> &y)
 {
 	// measure
 	float d = _sub_lidar->get().current_distance;
-	float eps = 0.01f;	// 1 cm
+	/* float eps = 0.01f;	// 1 cm */
+	float eps = 0.0f;	// 1 cm
 	float min_dist = _sub_lidar->get().min_distance + eps;
 	float max_dist = _sub_lidar->get().max_distance - eps;
 

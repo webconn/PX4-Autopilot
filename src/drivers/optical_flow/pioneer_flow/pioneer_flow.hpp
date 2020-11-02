@@ -94,6 +94,7 @@ private:
 	uint64_t _previous_collect_timestamp{0};
 
 	enum Rotation _yaw_rotation;
+        uint8_t _sonar_rotation;
 
 	int _flow_sum_x{0};
 	int _flow_sum_y{0};

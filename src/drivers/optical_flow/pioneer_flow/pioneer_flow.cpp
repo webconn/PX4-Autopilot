@@ -35,7 +35,7 @@
 
 static constexpr uint32_t TIME_us_TSWW = 11; //  - actually 10.5us
 static const uint32_t PIONEERFLOW_US = 1000;  // delay 1 ms
-static const uint32_t PIONEERFLOW_SAMPLE_INTERVAL = 20000;  // interval 20ms (50 Hz)
+static const uint32_t PIONEERFLOW_SAMPLE_INTERVAL = 10000;  // interval 20ms (50 Hz)
 
 PioneerFlow::PioneerFlow(I2CSPIBusOption bus_option, int bus, enum Rotation yaw_rotation, int bus_frequency,
 		 int address) :
@@ -206,11 +206,11 @@ PioneerFlow::RunImpl()
 		distance_report.max_distance = 1.5f;
 		distance_report.current_distance = report.ground_distance_m;
 		distance_report.variance = 0.0f;
-		distance_report.signal_quality = -1;
+		distance_report.signal_quality = 1;
 		distance_report.type = distance_sensor_s::MAV_DISTANCE_SENSOR_LASER;
 		/* TODO: the ID needs to be properly set */
 		distance_report.id = 0;
-		distance_report.orientation = _yaw_rotation;
+		distance_report.orientation = distance_sensor_s::ROTATION_DOWNWARD_FACING;
 
 		_distance_sensor_pub.publish(distance_report);
         }
